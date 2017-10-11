@@ -1,34 +1,35 @@
 import React from 'react';
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
+import reducer from './reducers'
 import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
-import deckListView from './components/deckListView'
-import newDeckView from './components/newDeckView'
+import DeckListView from './components/deckListView'
+import NewDeckView from './components/newDeckView'
 import { white, purple } from './utils/colors'
 import { Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo'
 
-function mainStatusBar ({backgroundColor}) {
+function MainStatusBar ({backgroundColor, ...props}) {
   return (
     <View style={{backgroundColor, height: Constants.statusBarHeight}}>
-      <StatusBar translucent backgroundColor={backgroundColor} />
+      <StatusBar translucent backgroundColor={backgroundColor} {...props}/>
     </View>
   )
 }
 
 const Tabs = TabNavigator({
   History: {
-    screen: deckListView,
+    screen: DeckListView,
     navigationOptions: {
-      tabBarLabel: 'History',
+      tabBarLabel: 'Deck List',
       tabBarIcon: ({ tintColor }) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />
     },
   },
   AddEntry: {
-    screen: newDeckView,
+    screen: NewDeckView,
     navigationOptions: {
-      tabBarLabel: 'Add Entry',
+      tabBarLabel: 'New Deck',
       tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
     },
   },
@@ -55,10 +56,13 @@ const Tabs = TabNavigator({
 export default class App extends React.Component {
   render() {
     return (
-      <View style={{flex: 1}}>
-        <Tabs/>
-      </View>
-    );
+      <Provider store={createStore(reducer)}>
+        <View style={{flex: 1}}>
+          <MainStatusBar backgroundColor={purple} barStyle="light-content"/>
+          <Tabs/>
+        </View>
+      </Provider>
+    )
   }
 }
 

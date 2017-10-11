@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { connect } from 'react-redux'
 
-export default class deckListView extends React.Component {
+class NewDeckView extends React.Component {
   render() {
     return (
       <View style={styles.container}>
@@ -20,3 +21,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+function mapStateToProps(deck) {
+	return {
+		deck
+	}
+}
+
+export default connect(mapStateToProps)(NewDeckView)
