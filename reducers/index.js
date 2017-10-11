@@ -4,7 +4,7 @@ import {
 
 const initialState = {
 	decks: [],
-	decksIsEmpty: false,
+	decksIsEmpty: true,
 }
 
 function flashCards (state = initialState, action) {

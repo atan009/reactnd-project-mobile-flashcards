@@ -7,7 +7,7 @@ import { TabNavigator, StackNavigator } from 'react-navigation';
 import DeckListView from './components/deckListView'
 import NewDeckView from './components/newDeckView'
 import { white, purple } from './utils/colors'
-import { Ionicons } from '@expo/vector-icons'
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Constants } from 'expo'
 
 function MainStatusBar ({backgroundColor, ...props}) {
@@ -19,18 +19,18 @@ function MainStatusBar ({backgroundColor, ...props}) {
 }
 
 const Tabs = TabNavigator({
-  History: {
+  DeckListView: {
     screen: DeckListView,
     navigationOptions: {
       tabBarLabel: 'Deck List',
-      tabBarIcon: ({ tintColor }) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />
+      tabBarIcon: ({ tintColor }) => <MaterialCommunityIcons name="cards" size={25} color={tintColor} />
     },
   },
-  AddEntry: {
+  NewDeckView: {
     screen: NewDeckView,
     navigationOptions: {
       tabBarLabel: 'New Deck',
-      tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
+      tabBarIcon: ({ tintColor }) => <Ionicons name="md-megaphone" size={25} color={tintColor} />
     },
   },
 }, {
@@ -39,6 +39,7 @@ const Tabs = TabNavigator({
   },
   tabBarOptions: {
     activeTintColor: white,
+    // showIcon: true,
     style: {
       height: 56,
       backgroundColor: purple,

@@ -2,12 +2,16 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux'
 
-
 class DeckListView extends React.Component {
   render() {
+  	const { flashCards } = this.props
+  	console.log(flashCards)
+
     return (
       <View style={styles.container}>
-        <Text>deckListView!</Text>
+        {(flashCards.decksIsEmpty && <Text>Start a deck</Text>) ||
+        	<Text>Hello World</Text>
+        }
       </View>
     );
   }
@@ -23,9 +27,9 @@ const styles = StyleSheet.create({
   },
 });
 
-function mapStateToProps(decks) {
+function mapStateToProps(flashCards) {
 	return {
-		decks
+		flashCards
 	}
 }
 
