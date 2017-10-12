@@ -2,6 +2,9 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import { connect } from 'react-redux'
 import { purple } from '../utils/colors'
+import {
+	saveDeckTitle
+} from '../actions'
 
 
 function onPressLearnMore () {
@@ -16,6 +19,8 @@ class NewDeckView extends React.Component {
 
 
   render() {
+  	var self = this
+  	console.log(this.props)
     return (
       <KeyboardAvoidingView behavior='padding' style={styles.container}>
         <Text style={styles.text}>What is the title of your new deck?</Text>
@@ -25,7 +30,7 @@ class NewDeckView extends React.Component {
 	        value={this.state.text}
 	        placeholder="Deck Title"
 	    />
-	    <TouchableOpacity onPress={onPressLearnMore}>
+	    <TouchableOpacity onPress={self.props.addDeck.bind(self,self.state)}>
 	    	<Text style={styles.buttonText}>Submit</Text>
 	    </TouchableOpacity>
       </KeyboardAvoidingView>
@@ -67,4 +72,10 @@ function mapStateToProps(deck) {
 	}
 }
 
-export default connect(mapStateToProps)(NewDeckView)
+function mapDispatchToProps(dispatch) {
+	return {
+		addDeck: (title) => dispatch(saveDeckTitle(title))
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewDeckView)

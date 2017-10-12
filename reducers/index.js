@@ -1,5 +1,6 @@
 import {
-	GET_DECKS
+	GET_DECKS,
+	SAVE_DECK_TITLE
 } from '../actions'
 
 const initialState = {
@@ -12,6 +13,15 @@ function flashCards (state = initialState, action) {
 		case GET_DECKS:
 			return {
 				...state
+			}
+
+		case SAVE_DECK_TITLE:
+			var tempDecks = state.decks
+			tempDecks.push(action.title.text)
+			return {
+				...state,
+				decks: tempDecks,
+				decksIsEmpty: false
 			}
 
 		default:
