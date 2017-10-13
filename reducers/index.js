@@ -17,7 +17,15 @@ function flashCards (state = initialState, action) {
 
 		case SAVE_DECK_TITLE:
 			var tempDecks = state.decks
-			tempDecks.push(action.title.text)
+
+			var tempDeck = {
+				title: action.title.text,
+				cards: [],
+				key: Date.now()
+			}
+			
+			tempDecks.push(tempDeck)
+			
 			return {
 				...state,
 				decks: tempDecks,

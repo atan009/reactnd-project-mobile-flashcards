@@ -7,10 +7,6 @@ import {
 } from '../actions'
 
 
-function onPressLearnMore () {
-	console.log("pressed")
-}
-
 class NewDeckView extends React.Component {
 	constructor(props) {
 	    super(props);
@@ -20,7 +16,7 @@ class NewDeckView extends React.Component {
 
   render() {
   	var self = this
-  	console.log(this.props)
+  	// console.log(this.props)
     return (
       <KeyboardAvoidingView behavior='padding' style={styles.container}>
         <Text style={styles.text}>What is the title of your new deck?</Text>
@@ -68,7 +64,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(deck) {
 	return {
-		deck
+		// deck
 	}
 }
 
