@@ -6,6 +6,7 @@ import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import DeckListView from './components/deckListView'
 import NewDeckView from './components/newDeckView'
+import deckDetails from './components/deckDetails'
 import { white, purple } from './utils/colors'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Constants } from 'expo'
@@ -54,13 +55,28 @@ const Tabs = TabNavigator({
   }
 })
 
+const MainNavigator = StackNavigator({
+  Home: {
+    screen: Tabs,
+  },
+  DeckDetails: {
+    screen: deckDetails,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple
+      }
+    }
+  }
+})
+
 export default class App extends React.Component {
   render() {
     return (
       <Provider store={createStore(reducer)}>
         <View style={{flex: 1}}>
           <MainStatusBar backgroundColor={purple} barStyle="light-content"/>
-          <Tabs/>
+          <MainNavigator/>
         </View>
       </Provider>
     )

@@ -1,16 +1,16 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native';
 import { connect } from 'react-redux'
-import gray from '../utils/colors'
-
-function onPressLearnMore () {
-	console.log("pressed")
-}
+import { gray } from '../utils/colors'
 
 class DeckListView extends React.Component {
 	renderItem(item) {
 		return (
-			<TouchableOpacity key={item.key} onPress={onPressLearnMore} style={styles.deck}>
+			<TouchableOpacity key={item.key} onPress={() => this.props.navigation.navigate (
+				'DeckDetails',
+				{key: item.key,
+					title: item.title},
+				)} style={styles.deck}>
 		    	<Text style={styles.deckTitle}>{item.title}</Text>
 		    	<Text style={styles.deckInfo}>{item.cards.length} cards</Text>
 		    </TouchableOpacity>
@@ -19,7 +19,6 @@ class DeckListView extends React.Component {
 
   render() {
   	const { flashCards } = this.props
-  	console.log(flashCards)
 
 
 

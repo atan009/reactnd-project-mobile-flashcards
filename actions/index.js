@@ -10,10 +10,10 @@ export function getDecks () {
 	}
 }
 
-export function getDeck (id) {
+export function getDeck (key) {
 	return {
 		type: GET_DECK,
-		deck
+		key
 	}
 }
 
