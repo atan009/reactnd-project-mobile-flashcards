@@ -8,6 +8,7 @@ import DeckListView from './components/deckListView'
 import NewDeckView from './components/newDeckView'
 import deckDetails from './components/deckDetails'
 import addCard from './components/addCard'
+import quiz from './components/quiz'
 import { white, purple } from './utils/colors'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Constants } from 'expo'
@@ -78,6 +79,15 @@ const MainNavigator = StackNavigator({
       }
     }
   },
+  Quiz: {
+    screen: quiz,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple
+      }
+    }
+  }
 })
 
 export default class App extends React.Component {
