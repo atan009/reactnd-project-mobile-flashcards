@@ -13,6 +13,10 @@ class NewDeckView extends React.Component {
 	    this.state = { text: '' };
 	}
 
+	submitTitle(title) {
+		this.props.addDeck(title)
+		this.setState({text: ''})
+	}
 
   render() {
   	var self = this
@@ -26,7 +30,7 @@ class NewDeckView extends React.Component {
 	        value={this.state.text}
 	        placeholder="Deck Title"
 	    />
-	    <TouchableOpacity onPress={self.props.addDeck.bind(self,self.state)}>
+	    <TouchableOpacity onPress={this.submitTitle.bind(self,self.state)}>
 	    	<Text style={styles.buttonText}>Submit</Text>
 	    </TouchableOpacity>
       </KeyboardAvoidingView>
