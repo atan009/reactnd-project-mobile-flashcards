@@ -7,6 +7,7 @@ import { TabNavigator, StackNavigator } from 'react-navigation';
 import DeckListView from './components/deckListView'
 import NewDeckView from './components/newDeckView'
 import deckDetails from './components/deckDetails'
+import addCard from './components/addCard'
 import { white, purple } from './utils/colors'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Constants } from 'expo'
@@ -67,7 +68,16 @@ const MainNavigator = StackNavigator({
         backgroundColor: purple
       }
     }
-  }
+  },
+  AddCard: {
+    screen: addCard,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple
+      }
+    }
+  },
 })
 
 export default class App extends React.Component {

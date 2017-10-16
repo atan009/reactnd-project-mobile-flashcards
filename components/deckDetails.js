@@ -26,7 +26,10 @@ class deckDetails extends Component {
       <View style={styles.container}>
         <Text style={styles.deckTitle}>{flashCards.curDeck && flashCards.curDeck.title}</Text>
         <Text style={styles.deckInfo}>{flashCards.curDeck && flashCards.curDeck.cards.length} cards</Text>
-        <TouchableOpacity style={styles.addBtn}>
+        <TouchableOpacity style={styles.addBtn} onPress={() => this.props.navigation.navigate (
+				'AddCard',
+				{key: flashCards.curDeck.key},
+				)}>
         	<Text>Add Card</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.quizBtn}>

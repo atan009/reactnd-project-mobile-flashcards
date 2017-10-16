@@ -24,10 +24,9 @@ export function saveDeckTitle (title) {
 	}
 }
 
-export function addCardToDeck (title, card) {
+export function addCardToDeck (card) {
 	return {
 		type: ADD_CARD_TO_DECK,
-		title,
 		card
 	}
 }

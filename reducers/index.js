@@ -2,6 +2,7 @@ import {
 	GET_DECKS,
 	GET_DECK,
 	SAVE_DECK_TITLE,
+	ADD_CARD_TO_DECK,
 } from '../actions'
 
 const initialState = {
@@ -47,6 +48,20 @@ function flashCards (state = initialState, action) {
 				...state,
 				decks: tempDecks,
 				decksIsEmpty: false
+			}
+
+		case ADD_CARD_TO_DECK:
+			tempDecks = state.decks
+			for (i = 0; i < tempDecks.length; i++) {
+				if (state.curDeck.key === tempDecks[i].key) {
+					tempDecks[i].cards.push(action.card)
+					tempDeck = tempDecks[i]
+				}
+			}
+			return {
+				...state,
+				curDeck: tempDeck,
+				decks: tempDecks
 			}
 
 		default:
