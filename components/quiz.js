@@ -54,6 +54,16 @@ class quiz extends React.Component {
 		})
 	}
 
+	restart() {
+		const { flashCards } = this.props
+		this.setState({
+			Q: 0,
+			correct: 0,
+			display: flashCards.curDeck.cards[0].question,
+			side: "Question"
+		})
+	}
+
 	render() {
 		var self = this
 		const { flashCards } = this.props
@@ -84,7 +94,7 @@ class quiz extends React.Component {
 					<View style={styles.container}>
 						<Text style={styles.display}>Results</Text>
 						<Text>{this.state.correct}/{flashCards.curDeck.cards.length}</Text>
-						<TouchableOpacity style={styles.correct}>
+						<TouchableOpacity style={styles.correct} onPress={this.restart.bind(this)}>
 			        		<Text style={styles.text}>Restart</Text>
 				        </TouchableOpacity>
 					</View>
