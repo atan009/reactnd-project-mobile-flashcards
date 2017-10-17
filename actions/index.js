@@ -17,10 +17,11 @@ export function getDeck (key) {
 	}
 }
 
-export function saveDeckTitle (title) {
+export function saveDeckTitle (title, key) {
 	return {
 		type: SAVE_DECK_TITLE,
-		title
+		title,
+		key
 	}
 }
 

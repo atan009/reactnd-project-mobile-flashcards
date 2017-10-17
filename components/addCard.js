@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, Keyboard } from 'react-native';
 import { connect } from 'react-redux'
 import { purple, gray } from '../utils/colors'
 import { addCardToDeck } from '../actions'
@@ -12,6 +12,7 @@ class addCard extends React.Component {
   	}
 
   	submitCard(question, answer) {
+  		Keyboard.dismiss()
   		this.props.addCard(this.state)
   		this.setState({question: '',
   			answer: ''})

@@ -12,6 +12,7 @@ class deckDetails extends Component {
 	componentWillMount() {
 		const { opacity } = this.state
 		var self = this
+		console.log(this.props.navigation.state.params)
 		this.props.getCurDeck(this.props.navigation.state.params.key)
 		Animated.timing(opacity, {toValue: 1, duration: 1000}).start()
 	}
@@ -29,6 +30,7 @@ class deckDetails extends Component {
   	const { opacity } = this.state
   	const { flashCards } = this.props
   	console.log(this.props)
+  	// console.log(this.props)
     return (
       <Animated.View style={[styles.container, {opacity}]}>
         <Text style={styles.deckTitle}>{flashCards.curDeck && flashCards.curDeck.title}</Text>

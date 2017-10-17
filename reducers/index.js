@@ -39,7 +39,7 @@ function flashCards (state = initialState, action) {
 			var tempDeck = {
 				title: action.title.text,
 				cards: [],
-				key: Date.now()
+				key: action.key
 			}
 			
 			tempDecks.push(tempDeck)

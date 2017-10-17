@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, KeyboardAvoidingView, Keyboard } from 'react-native';
 import { connect } from 'react-redux'
 import { purple } from '../utils/colors'
 import {
@@ -10,12 +10,21 @@ import {
 class NewDeckView extends React.Component {
 	constructor(props) {
 	    super(props);
-	    this.state = { text: '' };
+	    this.state = { 
+	    	text: '',
+	    	key: Date.now() };
 	}
 
 	submitTitle(title) {
-		this.props.addDeck(title)
+		var self = this
+		Keyboard.dismiss()
 		this.setState({text: ''})
+		this.props.addDeck(title, self.state.key)
+		self.props.navigation.navigate (
+			'DeckDetails',
+			{key: self.state.key,
+				title: title.text},
+			)
 	}
 
   render() {
@@ -65,15 +74,15 @@ const styles = StyleSheet.create({
   }
 });
 
-function mapStateToProps(deck) {
+function mapStateToProps(flashCards) {
 	return {
-		// deck
+		flashCards
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
-		addDeck: (title) => dispatch(saveDeckTitle(title))
+		addDeck: (title, key) => dispatch(saveDeckTitle(title, key))
 	}
 }
 
