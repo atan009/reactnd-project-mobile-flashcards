@@ -24,7 +24,7 @@ class DeckListView extends React.Component {
 
     return (
       <View style={styles.container}>
-        {(flashCards.decksIsEmpty && <Text>Start a deck</Text>) ||
+        {(flashCards.decksIsEmpty && <Text>Create a deck</Text>) ||
         	<FlatList
         		data={flashCards.decks}
         		extraData={flashCards}

@@ -1,13 +1,19 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, Animated } from 'react-native'
 import { connect } from 'react-redux'
 import { getDeck } from '../actions'
 import { gray, white } from '../utils/colors'
 
 class deckDetails extends Component {
+	state = {
+		opacity: new Animated.Value(0),
+	}
+
 	componentWillMount() {
+		const { opacity } = this.state
 		var self = this
 		this.props.getCurDeck(this.props.navigation.state.params.key)
+		Animated.timing(opacity, {toValue: 1, duration: 1000}).start()
 	}
 
   static navigationOptions = ({ navigation }) => {
@@ -20,10 +26,11 @@ class deckDetails extends Component {
   }
 
   render() {
+  	const { opacity } = this.state
   	const { flashCards } = this.props
   	console.log(this.props)
     return (
-      <View style={styles.container}>
+      <Animated.View style={[styles.container, {opacity}]}>
         <Text style={styles.deckTitle}>{flashCards.curDeck && flashCards.curDeck.title}</Text>
         <Text style={styles.deckInfo}>{flashCards.curDeck && flashCards.curDeck.cards.length} cards</Text>
         <TouchableOpacity style={styles.addBtn} onPress={() => this.props.navigation.navigate (
@@ -38,7 +45,7 @@ class deckDetails extends Component {
 				)}>
         	<Text style={styles.quizTxt}>Start Quiz</Text>
         </TouchableOpacity>
-      </View>
+      </Animated.View>
     )
   }
 }
