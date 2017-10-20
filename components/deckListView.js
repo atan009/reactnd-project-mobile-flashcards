@@ -41,7 +41,6 @@ class DeckListView extends React.Component {
   		return <Text>Loading previous data </Text>
   	}
   	else {
-  		console.log(this.props)
     return (
       <View style={styles.container}>
         {(flashCards.doneLoading && flashCards.decksIsEmpty && <Text>Create a deck</Text>) ||

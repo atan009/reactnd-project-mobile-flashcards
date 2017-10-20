@@ -9,6 +9,7 @@ import NewDeckView from './components/newDeckView'
 import deckDetails from './components/deckDetails'
 import addCard from './components/addCard'
 import quiz from './components/quiz'
+import cardListView from './components/cardListView'
 import { white, purple } from './utils/colors'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Constants } from 'expo'
@@ -82,6 +83,15 @@ const MainNavigator = StackNavigator({
   },
   Quiz: {
     screen: quiz,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple
+      }
+    }
+  },
+  CardsList: {
+    screen: cardListView,
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {

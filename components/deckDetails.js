@@ -1,13 +1,19 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, Animated } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, TouchableHighlight, Animated, Modal, AsyncStorage } from 'react-native'
 import { connect } from 'react-redux'
 import { getDeck } from '../actions'
-import { gray, white } from '../utils/colors'
+import { gray, white, red, green } from '../utils/colors'
+import { deleteDeck } from '../actions'
 
 class deckDetails extends Component {
 	state = {
 		opacity: new Animated.Value(0),
+		modalVisible: false
 	}
+
+	setModalVisible(visible) {
+	    this.setState({modalVisible: visible});
+	  }
 
 	componentWillMount() {
 		const { opacity } = this.state
@@ -15,6 +21,13 @@ class deckDetails extends Component {
 		// console.log(this.props.navigation.state.params)
 		this.props.getCurDeck(this.props.navigation.state.params.key)
 		Animated.timing(opacity, {toValue: 1, duration: 1000}).start()
+	}
+
+	deleteDeck(key) {
+		this.setModalVisible(false)
+		this.props.delDeck(key)
+		this.props.navigation.goBack()
+		AsyncStorage.setItem('storageUID', JSON.stringify(this.props.flashCards))
 	}
 
   static navigationOptions = ({ navigation }) => {
@@ -44,7 +57,38 @@ class deckDetails extends Component {
 				'Quiz',
 				{key: flashCards.curDeck.key},
 				)}>
-        	<Text style={styles.quizTxt}>Start Quiz</Text>
+        	<Text style={{color: white}}>Start Quiz</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.dltBtn} onPress={() => this.props.navigation.navigate (
+				'CardListView',
+				{key: flashCards.curDeck.key},
+				)}>
+        	<Text>Delete Cards</Text>
+        </TouchableOpacity>
+
+        <Modal
+          animationType="slide"
+          transparent={false}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {this.setModalVisible(!this.state.modalVisible)}}
+          >
+         <View style={styles.dltModal}>
+          <View>
+            <TouchableOpacity style={styles.yesBtn} onPress={this.deleteDeck.bind(this,this.props.navigation.state.params.key)}>
+        		<Text style={{color: white}}>Yes</Text>
+	        </TouchableOpacity>
+	        <TouchableOpacity style={styles.dltBtn} onPress={this.setModalVisible.bind(this,false)}>
+	        	<Text style={{color: white}}>No</Text>
+	        </TouchableOpacity>
+
+          </View>
+         </View>
+        </Modal>
+
+        <TouchableOpacity style={styles.dltBtn} onPress={() => {
+          this.setModalVisible(true)
+        }}>
+        	<Text style={{color: white}}>Delete Deck</Text>
         </TouchableOpacity>
       </Animated.View>
     )
@@ -89,8 +133,35 @@ const styles = StyleSheet.create({
   	borderRadius: 5,
   	marginTop: 5
   },
-  quizTxt: {
-  	color: white
+  dltBtn: {
+  	backgroundColor: red,
+  	borderColor: '#000',
+  	padding: 10,
+  	paddingLeft: 50,
+  	paddingRight: 50,
+  	justifyContent: 'center',
+  	alignItems: 'center',
+  	borderWidth: 1,
+  	borderRadius: 5,
+  	marginTop: 5
+  },
+  dltModal: {
+  	flex: 1,
+    justifyContent: 'center',
+  	alignItems: 'center',
+  	margin: 45
+  },
+  yesBtn: {
+  	backgroundColor: green,
+  	borderColor: '#000',
+  	padding: 10,
+  	paddingLeft: 50,
+  	paddingRight: 50,
+  	justifyContent: 'center',
+  	alignItems: 'center',
+  	borderWidth: 1,
+  	borderRadius: 5,
+  	marginTop: 5
   }
 });
 
@@ -102,7 +173,8 @@ function mapStateToProps(flashCards) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		getCurDeck: (key) => dispatch(getDeck(key))
+		getCurDeck: (key) => dispatch(getDeck(key)),
+		delDeck: (key) => dispatch(deleteDeck(key))
 	}
 } 
 

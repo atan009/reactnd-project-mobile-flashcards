@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, Keyboard } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, Keyboard, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux'
 import { purple, gray } from '../utils/colors'
 import { addCardToDeck } from '../actions'
@@ -16,12 +16,14 @@ class addCard extends React.Component {
   		this.props.addCard(this.state)
   		this.setState({question: '',
   			answer: ''})
+  		AsyncStorage.setItem('storageUID', JSON.stringify(this.props.flashCards))
   	}
 
   	constructor(props) {
 	    super(props);
 	    this.state = { question: '',
-	    answer: '' };
+	    answer: '',
+	    key: Date.now() };
 	}
 
 	render() {

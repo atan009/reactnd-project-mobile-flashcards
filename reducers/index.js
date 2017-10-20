@@ -3,6 +3,7 @@ import {
 	GET_DECK,
 	SAVE_DECK_TITLE,
 	ADD_CARD_TO_DECK,
+	DELETE_DECK,
 } from '../actions'
 
 const initialState = {
@@ -69,6 +70,13 @@ function flashCards (state = initialState, action) {
 				...state,
 				curDeck: tempDeck,
 				decks: tempDecks
+			}
+
+		case DELETE_DECK:
+			return {
+				...state,
+				decks: state.decks.filter((deck) => deck.key !== action.key),
+				decksIsEmpty: state.decks.length === 0 ? true : false
 			}
 
 		default:
