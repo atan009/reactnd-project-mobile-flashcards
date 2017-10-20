@@ -2,6 +2,10 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList } from 'react-native';
 import { connect } from 'react-redux'
 import { red, green, white } from '../utils/colors'
+import { 
+	getDailyReminderValue,
+	clearLocalNotification,
+	setLocalNotification} from '../utils/helper'
 
 class quiz extends React.Component {
 	static navigationOptions = ({ navigation }) => {
@@ -62,6 +66,8 @@ class quiz extends React.Component {
 			display: flashCards.curDeck.cards[0].question,
 			side: "Question"
 		})
+		clearLocalNotification()
+		.then(setLocalNotification)
 	}
 
 	render() {

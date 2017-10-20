@@ -8,18 +8,25 @@ import {
 const initialState = {
 	decks: [],
 	decksIsEmpty: true,
-	curDeck: null
+	curDeck: null,
+	doneLoading: false
 }
 
 function flashCards (state = initialState, action) {
 	switch (action.type) {
 		case GET_DECKS:
+			console.log(action)
+			if (action.decks !== null) {	
+				state = action.decks
+			}
+			else {
+				state.doneLoading = true
+			}
 			return {
-				...state
+				...state,
 			}
 
 		case GET_DECK:
-			console.log(action)
 			var tempDeck
 			for (var i = 0; i < state.decks.length; i++) {
 				if (state.decks[i].key === action.key) {

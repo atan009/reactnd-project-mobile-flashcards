@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, KeyboardAvoidingView, Keyboard } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, KeyboardAvoidingView, Keyboard, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux'
 import { purple } from '../utils/colors'
 import {
@@ -25,6 +25,7 @@ class NewDeckView extends React.Component {
 			{key: self.state.key,
 				title: title.text},
 			)
+		AsyncStorage.setItem('storageUID', JSON.stringify(this.props.flashCards))
 	}
 
   render() {
