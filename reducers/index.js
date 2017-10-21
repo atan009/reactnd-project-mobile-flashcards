@@ -4,6 +4,7 @@ import {
 	SAVE_DECK_TITLE,
 	ADD_CARD_TO_DECK,
 	DELETE_DECK,
+	DELETE_CARD
 } from '../actions'
 
 const initialState = {
@@ -16,7 +17,7 @@ const initialState = {
 function flashCards (state = initialState, action) {
 	switch (action.type) {
 		case GET_DECKS:
-			console.log(action)
+			// console.log(action)
 			if (action.decks !== null) {	
 				state = action.decks
 			}
@@ -59,6 +60,7 @@ function flashCards (state = initialState, action) {
 			}
 
 		case ADD_CARD_TO_DECK:
+			action.card.key = Date.now()
 			tempDecks = state.decks
 			for (i = 0; i < tempDecks.length; i++) {
 				if (state.curDeck.key === tempDecks[i].key) {
@@ -77,6 +79,18 @@ function flashCards (state = initialState, action) {
 				...state,
 				decks: state.decks.filter((deck) => deck.key !== action.key),
 				decksIsEmpty: state.decks.length === 0 ? true : false
+			}
+
+		case DELETE_CARD:
+			tempDeck = state.curDeck
+			tempDeck.cards = tempDeck.cards.filter((card) => card.key !== action.key)
+			console.log(tempDeck)
+			// console.log(state)
+			// console.log(action)
+			return {
+				...state,
+				decks: state.decks.map((deck) => deck.key === tempDeck.key ? tempDeck : deck),
+				curDeck: tempDeck
 			}
 
 		default:

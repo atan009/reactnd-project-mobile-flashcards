@@ -3,6 +3,7 @@ export const GET_DECK = 'GET_DECK'
 export const SAVE_DECK_TITLE = 'SAVE_DECK_TITLE'
 export const ADD_CARD_TO_DECK = 'ADD_CARD_TO_DECK'
 export const DELETE_DECK = 'DELETE_DECK'
+export const DELETE_CARD = 'DELETE_CARD'
 
 export function getDecks (decks) {
 	return {
@@ -36,6 +37,13 @@ export function addCardToDeck (card) {
 export function deleteDeck(key) {
 	return {
 		type: DELETE_DECK,
+		key
+	}
+}
+
+export function deleteCard(key) {
+	return {
+		type: DELETE_CARD,
 		key
 	}
 }

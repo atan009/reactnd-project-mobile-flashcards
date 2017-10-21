@@ -21,9 +21,10 @@ class addCard extends React.Component {
 
   	constructor(props) {
 	    super(props);
-	    this.state = { question: '',
-	    answer: '',
-	    key: Date.now() };
+	    this.state = { 
+	    	question: '',
+	    	answer: ''
+		}
 	}
 
 	render() {

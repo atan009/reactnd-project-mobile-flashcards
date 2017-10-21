@@ -90,7 +90,7 @@ const MainNavigator = StackNavigator({
       }
     }
   },
-  CardsList: {
+  CardListView: {
     screen: cardListView,
     navigationOptions: {
       headerTintColor: white,

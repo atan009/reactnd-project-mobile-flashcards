@@ -13,12 +13,11 @@ class deckDetails extends Component {
 
 	setModalVisible(visible) {
 	    this.setState({modalVisible: visible});
-	  }
+    }
 
 	componentWillMount() {
 		const { opacity } = this.state
 		var self = this
-		// console.log(this.props.navigation.state.params)
 		this.props.getCurDeck(this.props.navigation.state.params.key)
 		Animated.timing(opacity, {toValue: 1, duration: 1000}).start()
 	}
@@ -42,7 +41,7 @@ class deckDetails extends Component {
   render() {
   	const { opacity } = this.state
   	const { flashCards } = this.props
-  	// console.log(this.props)
+
     return (
       <Animated.View style={[styles.container, {opacity}]}>
         <Text style={styles.deckTitle}>{flashCards.curDeck && flashCards.curDeck.title}</Text>
@@ -61,9 +60,10 @@ class deckDetails extends Component {
         </TouchableOpacity>
         <TouchableOpacity style={styles.dltBtn} onPress={() => this.props.navigation.navigate (
 				'CardListView',
-				{key: flashCards.curDeck.key},
+				{key: flashCards.curDeck.key,
+					title: flashCards.curDeck.title},
 				)}>
-        	<Text>Delete Cards</Text>
+        	<Text style={{color: white}}>Delete Cards</Text>
         </TouchableOpacity>
 
         <Modal
@@ -74,6 +74,7 @@ class deckDetails extends Component {
           >
          <View style={styles.dltModal}>
           <View>
+          	<Text style={{textAlign: 'center'}}>Are you sure?</Text>
             <TouchableOpacity style={styles.yesBtn} onPress={this.deleteDeck.bind(this,this.props.navigation.state.params.key)}>
         		<Text style={{color: white}}>Yes</Text>
 	        </TouchableOpacity>
