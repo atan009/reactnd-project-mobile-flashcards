@@ -4,6 +4,7 @@ export const SAVE_DECK_TITLE = 'SAVE_DECK_TITLE'
 export const ADD_CARD_TO_DECK = 'ADD_CARD_TO_DECK'
 export const DELETE_DECK = 'DELETE_DECK'
 export const DELETE_CARD = 'DELETE_CARD'
+export const TOGGLE_NOTIFICATIONS = 'TOGGLE_NOTIFICATIONS'
 
 export function getDecks (decks) {
 	return {
@@ -45,5 +46,11 @@ export function deleteCard(key) {
 	return {
 		type: DELETE_CARD,
 		key
+	}
+}
+
+export function toggleNotifications() {
+	return {
+		type: TOGGLE_NOTIFICATIONS
 	}
 }

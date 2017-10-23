@@ -4,14 +4,16 @@ import {
 	SAVE_DECK_TITLE,
 	ADD_CARD_TO_DECK,
 	DELETE_DECK,
-	DELETE_CARD
+	DELETE_CARD,
+	TOGGLE_NOTIFICATIONS
 } from '../actions'
 
 const initialState = {
 	decks: [],
 	decksIsEmpty: true,
 	curDeck: null,
-	doneLoading: false
+	doneLoading: false,
+	notification: true
 }
 
 function flashCards (state = initialState, action) {
@@ -91,6 +93,12 @@ function flashCards (state = initialState, action) {
 				...state,
 				decks: state.decks.map((deck) => deck.key === tempDeck.key ? tempDeck : deck),
 				curDeck: tempDeck
+			}
+
+		case TOGGLE_NOTIFICATIONS:
+			return {
+				...state,
+				notification: !state.notification
 			}
 
 		default:

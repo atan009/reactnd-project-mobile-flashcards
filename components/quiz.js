@@ -41,33 +41,48 @@ class quiz extends React.Component {
 
 	correct() {
 		const { flashCards } = this.props
-		this.setState({
-			Q: this.state.Q + 1,
-			correct: this.state.correct + 1,
-			display: flashCards.curDeck.cards[this.state.Q].question,
-			side: "Question"
-		})
+		if (this.state.Q+1 < flashCards.curDeck.cards.length) {
+			this.setState({
+				Q: this.state.Q + 1,
+				display: flashCards.curDeck.cards[this.state.Q+1].question,
+				correct: this.state.correct + 1,
+				side: "Question"
+			})
+		} else {
+			this.setState({
+				Q: this.state.Q + 1,
+				correct: this.state.correct + 1
+			})
+		}
 	}
 
 	incorrect() {
 		const { flashCards } = this.props
-		this.setState({
-			Q: this.state.Q + 1,
-			display: flashCards.curDeck.cards[this.state.Q].question,
-			side: "Question"
-		})
+		if (this.state.Q+1 < flashCards.curDeck.cards.length) {
+			this.setState({
+				Q: this.state.Q + 1,
+				display: flashCards.curDeck.cards[this.state.Q+1].question,
+				side: "Question"
+			})
+		} else {
+			this.setState({
+				Q: this.state.Q + 1
+			})
+		}
 	}
 
 	restart() {
 		const { flashCards } = this.props
 		this.setState({
+			display: flashCards.curDeck.cards[0].question,
 			Q: 0,
 			correct: 0,
-			display: flashCards.curDeck.cards[0].question,
 			side: "Question"
 		})
-		clearLocalNotification()
-		.then(setLocalNotification)
+		if (flashCards.notification) {
+			clearLocalNotification()
+			.then(setLocalNotification)
+		}
 	}
 
 	render() {

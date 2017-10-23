@@ -10,6 +10,7 @@ import deckDetails from './components/deckDetails'
 import addCard from './components/addCard'
 import quiz from './components/quiz'
 import cardListView from './components/cardListView'
+import Settings from './components/settings'
 import { white, purple } from './utils/colors'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Constants } from 'expo'
@@ -38,6 +39,12 @@ const Tabs = TabNavigator({
       tabBarIcon: ({ tintColor }) => <Ionicons name="md-megaphone" size={25} color={tintColor} />
     },
   },
+  Settings: {
+    screen: Settings,
+      navigationOptions: {
+        tabBarLabel: 'Settings'
+    }
+  }
 }, {
   navigationOptions: {
     header: null

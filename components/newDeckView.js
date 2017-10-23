@@ -11,18 +11,19 @@ class NewDeckView extends React.Component {
 	constructor(props) {
 	    super(props);
 	    this.state = { 
-	    	text: '',
-	    	key: Date.now() };
+	    	text: ''
+	    };
 	}
 
 	submitTitle(title) {
 		var self = this
 		Keyboard.dismiss()
 		this.setState({text: ''})
-		this.props.addDeck(title, self.state.key)
+		var key = Date.now()
+		this.props.addDeck(title, key)
 		self.props.navigation.navigate (
 			'DeckDetails',
-			{key: self.state.key,
+			{key,
 				title: title.text},
 			)
 		AsyncStorage.setItem('storageUID', JSON.stringify(this.props.flashCards))
