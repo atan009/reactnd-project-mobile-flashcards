@@ -6,7 +6,7 @@ The most recent version of the guide is available [here](https://github.com/reac
 Clone the repository or download the zip and extract the files
 
 * Install and run the commands
-    - `cd api-server`
+    - `cd reactnd-project-mobile-flashcards`
     - `yarn install`
     - `yarn run`
    
