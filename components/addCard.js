@@ -17,6 +17,7 @@ class addCard extends React.Component {
   		this.setState({question: '',
   			answer: ''})
   		AsyncStorage.setItem('storageUID', JSON.stringify(this.props.flashCards))
+  		this.props.navigation.goBack()
   	}
 
   	constructor(props) {

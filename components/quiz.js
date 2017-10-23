@@ -88,6 +88,7 @@ class quiz extends React.Component {
 	render() {
 		var self = this
 		const { flashCards } = this.props
+		const { goBack } = this.props.navigation
 		return (
 			<View style={{flex: 1}}>
 				<View>
@@ -117,6 +118,9 @@ class quiz extends React.Component {
 						<Text>{this.state.correct}/{flashCards.curDeck.cards.length}</Text>
 						<TouchableOpacity style={styles.correct} onPress={this.restart.bind(this)}>
 			        		<Text style={styles.text}>Restart</Text>
+				        </TouchableOpacity>
+				        <TouchableOpacity style={styles.backBtn} onPress={() => goBack()}>
+			        		<Text>Back To Deck</Text>
 				        </TouchableOpacity>
 					</View>
 				}
@@ -166,7 +170,19 @@ const styles = StyleSheet.create({
   },
   text: {
   	color: white
-  }
+  },
+  backBtn: {
+  	backgroundColor: white,
+  	borderColor: '#000',
+  	padding: 10,
+  	paddingLeft: 50,
+  	paddingRight: 50,
+  	justifyContent: 'center',
+  	alignItems: 'center',
+  	borderWidth: 1,
+  	borderRadius: 5,
+  	marginTop: 5
+  },
 })
 
 function mapStateToProps(flashCards) {
